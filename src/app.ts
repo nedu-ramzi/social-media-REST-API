@@ -6,9 +6,7 @@ import compression from 'compression';
 import cors from 'cors';
 import http from 'http';
 import { config } from './config/main.config';
-import { router as usersRoute } from './routes/users.route';
-import {router as authRoute} from './routes/auth.route';
-import {router as postRoute} from './routes/post.route'
+import router from './routes/index';
 //initialize express
 const app = express();
 const server = http.createServer(app);
@@ -24,9 +22,8 @@ app.use(cors({
 }))
 
 //routes
-app.use('/api/auth', authRoute);
-app.use('/api/users', usersRoute);
-app.use('/api/posts', postRoute);
+app.use('/api', router());
+
 
 //database
 config.database();
